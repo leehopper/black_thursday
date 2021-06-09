@@ -143,7 +143,7 @@ RSpec.describe SalesAnalyst do
   end
 
   it 'returns a merchants with pending invoices' do
-    expect(@sa.merchants_with_pending_invoices.length).to eq(44)
+    expect(@sa.merchants_with_pending_invoices.length).to eq(6)
   end
 
   it 'can find merchants with only one item' do
@@ -181,9 +181,9 @@ RSpec.describe SalesAnalyst do
   end
 
   xit '.best_item_for_merchant' do
-    expect(@sa.best_item_for_merchant(77777)).to be_a(Item)
+    expect(@sa.best_item_for_merchant(33333)).to be_a(Item)
 
-    expect(@sa.best_item_for_merchant(77777).id).to eq(0)
+    expect(@sa.best_item_for_merchant(33333).id).to eq(0)
   end
 
   it 'can find total revenue by merchant' do
