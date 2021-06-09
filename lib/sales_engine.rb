@@ -27,13 +27,11 @@ class SalesEngine
   end
 
   def revenue_by_date(date)
-    total_revenue_by_date = {}
-    @invoices.find_invoice_by_date(date).each do |invoice|
+    @invoices.find_invoice_by_date(date).each_with_object({}) do |invoice, total_revenue_by_date|
       if transaction_repo_invoice_paid_in_full(invoice.id) == true
         total_revenue_by_date[date] = invoice_items_repo_invoice_total_by_id(invoice.id)
       end
     end
-    total_revenue_by_date
   end
 
   def item_repo_group_items_by_merchant
