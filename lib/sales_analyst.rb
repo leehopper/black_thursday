@@ -197,9 +197,15 @@ class SalesAnalyst
     end
   end
 
-  def best_item_for_merchant(merchant_id) merchant_items_by_total_quantity(merchant_id).max_by do |id, quantity|
-      @se.item_repo_find_by_id(id) * quantity
+  def best_item_for_merchant(merchant_id)
+    profit_by_item = {}
+    merchant_items_by_total_quantity(merchant_id).each do |id, quantity|
+      profit_by_item[id] = @se.item_repo_find_by_id(id).unit_price * quantity
     end
+    best_item = profit_by_item.max_by do |id, profit|
+      profit
+    end
+    @se.item_repo_find_by_id(best_item[0])
   end
 
   def revenue_by_merchant(id)
